@@ -13,7 +13,7 @@ docker-compose exec backend python manage.py makemigrations tweets
 to create migrations for search model run
 docker-compose exec backend python manage.py makemigrations search  
 
-to appply migrations run
+to apply migrations run
 docker-compose exec backend python manage.py migrate
 
 to check tests coverage run

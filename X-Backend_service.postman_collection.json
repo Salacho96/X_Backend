@@ -1,0 +1,557 @@
+{
+	"info": {
+		"_postman_id": "bdd14036-321f-42f5-bb35-feec93655492",
+		"name": "X-Backend_service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39294107"
+	},
+	"item": [
+		{
+			"name": "Auth - Register New User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"prueb2@prueba.com\",\n    \"username\": \"prueba2\",\n    \"password\": \"prueba23456\"\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/auth/register/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"auth",
+						"register",
+						""
+					]
+				},
+				"description": "Generated from cURL: curl -X POST http://localhost:8000/api/auth/register/ \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"email\": \"test@test.com\",\n    \"username\": \"testuser\",\n    \"password\": \"testpass123\"\n  }'"
+			},
+			"response": []
+		},
+		{
+			"name": "Auth - Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"prueb2@prueba.com\",\n    \"password\": \"prueba23456\"\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/auth/login/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"auth",
+						"login",
+						""
+					]
+				},
+				"description": "Generated from cURL: curl -X POST http://localhost:8000/api/auth/login/ \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\n    \"email\": \"test@test.com\",\n    \"password\": \"testpass123\"\n  }'"
+			},
+			"response": []
+		},
+		{
+			"name": "JWT_TEST",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzc1OTUyMTc4LCJpYXQiOjE3NzU5NDg1NzgsImp0aSI6ImJiOWI0MWJkZmI4NTQ5MzU4MDRmZjY0MmUwMmZmZWU5IiwidXNlcl9pZCI6IjIifQ.7XWgWF-yyZpC7MdBEZcvVXh6YGmFRGx4JsLPoGSgPaw"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/auth/profile/prueba2/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"auth",
+						"profile",
+						"prueba2",
+						""
+					]
+				},
+				"description": "Generated from cURL: curl -X GET http://localhost:8000/api/auth/profile/testuser/ \\\n  -H \"Authorization: Bearer <tu_access_token>\""
+			},
+			"response": []
+		},
+		{
+			"name": "Search -  Generate Tweet",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzc1OTc2NDQ0LCJpYXQiOjE3NzU5NzI4NDQsImp0aSI6IjE3ZDA3NmU1YWI0ZDQ2MjU4NTlhZmRhZDgyZTRiY2UzIiwidXNlcl9pZCI6IjIifQ.-CiBTg0JWPE_c1Y3EZzrBfsxR6jD6fkssRirZsbHBOI"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"content\": \"Usr #2 third tweet\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/tweets/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"tweets",
+						""
+					]
+				},
+				"description": "Generated from cURL: curl -X POST http://localhost:8000/api/tweets/ \\\n  -H \"Authorization: Bearer <tu_access_token>\" \\\n  -H \"Content-Type: application/json\" \\\n  -d '{\"content\": \"Mi primer tweet!\"}'"
+			},
+			"response": []
+		},
+		{
+			"name": "GET Search Tweets",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzc1OTcyMjE1LCJpYXQiOjE3NzU5Njg2MTUsImp0aSI6ImNlZTczMjllMWNiOTQwODk5M2RmMWZhMTgxNmQ2YWNkIiwidXNlcl9pZCI6IjIifQ.FxxId7Pk7OIXxi8MvOgoh4qD1PUefMf_9dGsXI1WsLo"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/search/users/?q=prueba1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"search",
+						"users",
+						""
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "prueba1"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl -X GET \"http://localhost:8000/api/search/users/?q=prueba\" \\\n  -H \"Authorization: Bearer <tu_access_token>\""
+			},
+			"response": []
+		},
+		{
+			"name": "Auth - Refresh Login",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzc1OTc2NDQ0LCJpYXQiOjE3NzU5NzI4NDQsImp0aSI6IjE3ZDA3NmU1YWI0ZDQ2MjU4NTlhZmRhZDgyZTRiY2UzIiwidXNlcl9pZCI6IjIifQ.-CiBTg0JWPE_c1Y3EZzrBfsxR6jD6fkssRirZsbHBOI"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/auth/profile/prueba2/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"auth",
+						"profile",
+						"prueba2",
+						""
+					]
+				},
+				"description": "Generated from cURL: curl -X 'GET' \\\n  'http://localhost:8000/api/auth/profile/prueba1/' \\\n  -H 'accept: */*'"
+			},
+			"response": []
+		},
+		{
+			"name": "Auth - Update User",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzc1OTcyMjE1LCJpYXQiOjE3NzU5Njg2MTUsImp0aSI6ImNlZTczMjllMWNiOTQwODk5M2RmMWZhMTgxNmQ2YWNkIiwidXNlcl9pZCI6IjIifQ.FxxId7Pk7OIXxi8MvOgoh4qD1PUefMf_9dGsXI1WsLo"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"bio\": \"esta es la Bio del user prueba2\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/auth/profile/prueba2/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"auth",
+						"profile",
+						"prueba2",
+						""
+					]
+				},
+				"description": "Generated from cURL: curl --location --request PUT 'http://localhost:8000/api/auth/profile/prueba2/' \\\n--header 'Authorization: Bearer <token_fresco>' \\\n--header 'Content-Type: application/json' \\\n--data '{\n    \"bio\": \"Mi nueva bio\"\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Auth - Logout",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer <access_token>"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"refresh\": \"\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/auth/logout/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"auth",
+						"logout",
+						""
+					]
+				},
+				"description": "Generated from cURL: curl --location --request POST 'http://localhost:8000/api/auth/logout/' \\\n--header 'Authorization: Bearer <access_token>' \\\n--header 'Content-Type: application/json' \\\n--data '{\n    \"refresh\": \"<refresh_token>\"\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Auth - Get Followers",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzc1OTc2NDQ0LCJpYXQiOjE3NzU5NzI4NDQsImp0aSI6IjE3ZDA3NmU1YWI0ZDQ2MjU4NTlhZmRhZDgyZTRiY2UzIiwidXNlcl9pZCI6IjIifQ.-CiBTg0JWPE_c1Y3EZzrBfsxR6jD6fkssRirZsbHBOI"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/auth/profile/prueba/followers/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"auth",
+						"profile",
+						"prueba",
+						"followers",
+						""
+					]
+				},
+				"description": "Generated from cURL: curl -X 'GET' \\\n  'http://localhost:8000/api/auth/profile/prueba1/followers/' \\\n  -H 'accept: */*'"
+			},
+			"response": []
+		},
+		{
+			"name": "Auth - Get Following",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzc1OTc2NDQ0LCJpYXQiOjE3NzU5NzI4NDQsImp0aSI6IjE3ZDA3NmU1YWI0ZDQ2MjU4NTlhZmRhZDgyZTRiY2UzIiwidXNlcl9pZCI6IjIifQ.-CiBTg0JWPE_c1Y3EZzrBfsxR6jD6fkssRirZsbHBOI"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/auth/profile/prueba2/following/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"auth",
+						"profile",
+						"prueba2",
+						"following",
+						""
+					]
+				},
+				"description": "Generated from cURL: curl -X 'GET' \\\n  'http://localhost:8000/api/auth/profile/Prueba2/following/' \\\n  -H 'accept: */*'"
+			},
+			"response": []
+		},
+		{
+			"name": "Tweets - Get all Tweets",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzc1OTc2NDQ0LCJpYXQiOjE3NzU5NzI4NDQsImp0aSI6IjE3ZDA3NmU1YWI0ZDQ2MjU4NTlhZmRhZDgyZTRiY2UzIiwidXNlcl9pZCI6IjIifQ.-CiBTg0JWPE_c1Y3EZzrBfsxR6jD6fkssRirZsbHBOI"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/tweets/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"tweets",
+						""
+					]
+				},
+				"description": "Generated from cURL: curl --location 'http://localhost:8000/api/tweets/' \\\n--header 'Authorization: Bearer <token_fresco>'"
+			},
+			"response": []
+		},
+		{
+			"name": "Tweets - Create Tweet",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzc1OTc2NDQ0LCJpYXQiOjE3NzU5NzI4NDQsImp0aSI6IjE3ZDA3NmU1YWI0ZDQ2MjU4NTlhZmRhZDgyZTRiY2UzIiwidXNlcl9pZCI6IjIifQ.-CiBTg0JWPE_c1Y3EZzrBfsxR6jD6fkssRirZsbHBOI"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "X-CSRFTOKEN",
+						"value": "QMJySoNwLtOuBdT8U0mFRxVZOsmrXgmT6HYhnZkOKjSVPHmuFPMEmzBnAUjTmNRE"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"content\": \"Este es un tweet\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/tweets/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"tweets",
+						""
+					]
+				},
+				"description": "Generated from cURL: curl -X 'POST' \\\n  'http://localhost:8000/api/tweets/' \\\n  -H 'accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'X-CSRFTOKEN: QMJySoNwLtOuBdT8U0mFRxVZOsmrXgmT6HYhnZkOKjSVPHmuFPMEmzBnAUjTmNRE' \\\n  -d '{\n  \"content\": \"string\"\n}'"
+			},
+			"response": []
+		},
+		{
+			"name": "Tweets - Get Tweet Detail By ID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzc1OTc2NDQ0LCJpYXQiOjE3NzU5NzI4NDQsImp0aSI6IjE3ZDA3NmU1YWI0ZDQ2MjU4NTlhZmRhZDgyZTRiY2UzIiwidXNlcl9pZCI6IjIifQ.-CiBTg0JWPE_c1Y3EZzrBfsxR6jD6fkssRirZsbHBOI"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/tweets/2/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"tweets",
+						"2",
+						""
+					]
+				},
+				"description": "Generated from cURL: curl -X 'GET' \\\n  'http://localhost:8000/api/tweets/2/' \\\n  -H 'accept: application/json'"
+			},
+			"response": []
+		},
+		{
+			"name": "Tweets - Delete Tweet",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzc1OTc2NDQ0LCJpYXQiOjE3NzU5NzI4NDQsImp0aSI6IjE3ZDA3NmU1YWI0ZDQ2MjU4NTlhZmRhZDgyZTRiY2UzIiwidXNlcl9pZCI6IjIifQ.-CiBTg0JWPE_c1Y3EZzrBfsxR6jD6fkssRirZsbHBOI"
+					},
+					{
+						"key": "X-CSRFTOKEN",
+						"value": "QMJySoNwLtOuBdT8U0mFRxVZOsmrXgmT6HYhnZkOKjSVPHmuFPMEmzBnAUjTmNRE"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/tweets/2/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"tweets",
+						"2",
+						""
+					]
+				},
+				"description": "Generated from cURL: curl -X 'DELETE' \\\n  'http://localhost:8000/api/tweets/2/' \\\n  -H 'accept: */*' \\\n  -H 'X-CSRFTOKEN: QMJySoNwLtOuBdT8U0mFRxVZOsmrXgmT6HYhnZkOKjSVPHmuFPMEmzBnAUjTmNRE'"
+			},
+			"response": []
+		},
+		{
+			"name": "Tweets - Like/Unlike",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzc1OTc2NDQ0LCJpYXQiOjE3NzU5NzI4NDQsImp0aSI6IjE3ZDA3NmU1YWI0ZDQ2MjU4NTlhZmRhZDgyZTRiY2UzIiwidXNlcl9pZCI6IjIifQ.-CiBTg0JWPE_c1Y3EZzrBfsxR6jD6fkssRirZsbHBOI"
+					},
+					{
+						"key": "X-CSRFTOKEN",
+						"value": "QMJySoNwLtOuBdT8U0mFRxVZOsmrXgmT6HYhnZkOKjSVPHmuFPMEmzBnAUjTmNRE"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/tweets/1/like/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"tweets",
+						"1",
+						"like",
+						""
+					]
+				},
+				"description": "Generated from cURL: curl -X 'POST' \\\n  'http://localhost:8000/api/tweets/1/like/' \\\n  -H 'accept: */*' \\\n  -H 'X-CSRFTOKEN: QMJySoNwLtOuBdT8U0mFRxVZOsmrXgmT6HYhnZkOKjSVPHmuFPMEmzBnAUjTmNRE' \\\n  -d ''"
+			},
+			"response": []
+		},
+		{
+			"name": "Tweets - Timeline",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzc1OTc2NDQ0LCJpYXQiOjE3NzU5NzI4NDQsImp0aSI6IjE3ZDA3NmU1YWI0ZDQ2MjU4NTlhZmRhZDgyZTRiY2UzIiwidXNlcl9pZCI6IjIifQ.-CiBTg0JWPE_c1Y3EZzrBfsxR6jD6fkssRirZsbHBOI"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8000/api/tweets/timeline/?page=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"tweets",
+						"timeline",
+						""
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				},
+				"description": "Generated from cURL: curl -X 'GET' \\\n  'http://localhost:8000/api/tweets/timeline/?page=1' \\\n  -H 'accept: application/json'"
+			},
+			"response": []
+		}
+	]
+}

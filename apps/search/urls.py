@@ -1,3 +1,6 @@
 from django.urls import path
+from .views import UserSearchView
 
-urlpatterns = []
+urlpatterns = [
+    path('users/', UserSearchView.as_view(), name='user-search'),
+]

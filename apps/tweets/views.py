@@ -1,3 +1,102 @@
-from django.shortcuts import render
+from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
+from django.shortcuts import get_object_or_404
+from django.core.paginator import Paginator
 
-# Create your views here.
+from .models import Tweet, Like
+from .serializer import TweetSerializer, TweetCreateSerializer
+from apps.users.models import User
+from apps.utils import success_response, error_response
+
+
+class TweetListCreateView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        tweets = Tweet.objects.filter(
+            author=request.user
+        ).select_related('author')
+        page_number = request.query_params.get('page', 1)
+        paginator = Paginator(tweets, 10)
+        page = paginator.get_page(page_number)
+        serializer = TweetSerializer(page.object_list, many=True, context={'request': request})
+        return success_response(data={
+            'tweets': serializer.data,
+            'total_pages': paginator.num_pages,
+            'current_page': page.number,
+            'has_next': page.has_next(),
+            'has_previous': page.has_previous(),
+        })
+
+    def post(self, request):
+        serializer = TweetCreateSerializer(data=request.data)
+        if serializer.is_valid():
+            tweet = serializer.save(author=request.user)
+            return success_response(
+                data=TweetSerializer(tweet, context={'request': request}).data,
+                message='Tweet creado correctamente.',
+                status_code=201
+            )
+        return error_response(
+            message='Error al crear el tweet.',
+            errors=serializer.errors,
+            status_code=400
+        )
+
+
+class TweetDetailView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, pk):
+        tweet = get_object_or_404(Tweet, pk=pk)
+        serializer = TweetSerializer(tweet, context={'request': request})
+        return success_response(data=serializer.data)
+
+    def delete(self, request, pk):
+        tweet = get_object_or_404(Tweet, pk=pk)
+        if tweet.author != request.user:
+            return error_response(
+                message='No podés eliminar un tweet ajeno.',
+                status_code=403
+            )
+        tweet.delete()
+        return success_response(message='Tweet eliminado correctamente.')
+
+
+class TimelineView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        following_users = User.objects.filter(
+            followers__follower=request.user
+        )
+        tweets = Tweet.objects.filter(
+            author__in=following_users
+        ).select_related('author').prefetch_related('likes')
+
+        page_number = request.query_params.get('page', 1)
+        paginator = Paginator(tweets, 10)
+        page = paginator.get_page(page_number)
+        serializer = TweetSerializer(page.object_list, many=True, context={'request': request})
+        return success_response(data={
+            'tweets': serializer.data,
+            'total_pages': paginator.num_pages,
+            'current_page': page.number,
+            'has_next': page.has_next(),
+            'has_previous': page.has_previous(),
+        })
+
+
+class LikeView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, pk):
+        tweet = get_object_or_404(Tweet, pk=pk)
+        like, created = Like.objects.get_or_create(
+            user=request.user,
+            tweet=tweet
+        )
+        if not created:
+            like.delete()
+            return success_response(message='Like eliminado.')
+        return success_response(message='Like agregado.', status_code=201)

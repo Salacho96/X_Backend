@@ -4,7 +4,8 @@ Django==6.0.4
 django-cors-headers==4.9.0
 djangorestframework==3.17.1
 djangorestframework_simplejwt==5.5.1
-drf-spectacular==0.29.0
+drf-spectacular==0.28.0
+drf-spectacular-sidecar==2025.4.1
 Faker==40.13.0
 inflection==0.5.1
 iniconfig==2.3.0

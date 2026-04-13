@@ -31,6 +31,9 @@ docker-compose exec backend pytest tests/ -v --cov=apps --cov-report=term-missin
 # API documentation
 http://localhost:8000/api/docs/
 
+# Postman Collection in
+X-Backend_service.postman_collection.json
+
 # Example credentials (after running migrations)
 email: prueb2@prueba.com
 password: twitterpassword

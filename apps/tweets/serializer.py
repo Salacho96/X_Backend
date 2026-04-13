@@ -30,7 +30,7 @@ class TweetCreateSerializer(serializers.ModelSerializer):
 
     def validate_content(self, value):
         if not value.strip():
-            raise serializers.ValidationError('El tweet no puede estar vacío.')
+            raise serializers.ValidationError('The tweet cannot be empty.')
         return value
 
 

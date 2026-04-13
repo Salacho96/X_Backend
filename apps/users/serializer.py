@@ -27,9 +27,9 @@ class LoginSerializer(serializers.Serializer):
     def validate(self, data):
         user = authenticate(email=data['email'], password=data['password'])
         if not user:
-            raise serializers.ValidationError('Credenciales inválidas.')
+            raise serializers.ValidationError('Invalid credentials.')
         if not user.is_active:
-            raise serializers.ValidationError('Usuario inactivo.')
+            raise serializers.ValidationError('Inactive user.')
         data['user'] = user
         return data
 

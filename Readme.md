@@ -25,6 +25,7 @@ docker-compose exec backend python manage.py migrate
 docker-compose exec backend pytest tests/ -v
 
 # Run tests with coverage
+docker-compose exec backend pip3 install pytest-cov 
 docker-compose exec backend pytest tests/ -v --cov=apps --cov-report=term-missing
 
 # API documentation

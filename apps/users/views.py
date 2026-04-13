@@ -37,11 +37,11 @@ class RegisterView(APIView):
                     'access': str(refresh.access_token),
                     'refresh': str(refresh),
                 },
-                message='Usuario registrado correctamente.',
+                message='User successfully registered.',
                 status_code=201
             )
         return error_response(
-            message='Error en el registro.',
+            message='Error in registration.',
             errors=serializer.errors,
             status_code=400
         )
@@ -54,7 +54,7 @@ class LoginView(APIView):
         request=LoginSerializer,
         responses={200: UserProfileSerializer},
         summary='Login de usuario',
-        description='Autentica un usuario y retorna tokens JWT.',
+        description='Authenticates a user and returns JWT tokens.',
         examples=[
             OpenApiExample(
                 'Ejemplo login',
@@ -77,7 +77,7 @@ class LoginView(APIView):
                 message='Sesión iniciada correctamente.'
             )
         return error_response(
-            message='Credenciales inválidas.',
+            message='Invalid credentials.',
             errors=serializer.errors,
             status_code=400
         )
@@ -104,9 +104,9 @@ class LogoutView(APIView):
             refresh_token = request.data['refresh']
             token = RefreshToken(refresh_token)
             token.blacklist()
-            return success_response(message='Sesión cerrada correctamente.')
+            return success_response(message='Session successfully closed.')
         except Exception:
-            return error_response(message='Token inválido.', status_code=400)
+            return error_response(message='Invalid token.', status_code=400)
 
 
 class ProfileView(APIView):
@@ -136,12 +136,12 @@ class ProfileView(APIView):
     )
     def put(self, request, username):
         if request.user.username != username:
-            return error_response(message='No autorizado.', status_code=403)
+            return error_response(message='Unauthorized.', status_code=403)
         serializer = UserProfileSerializer(request.user, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
-            return success_response(data=serializer.data, message='Perfil actualizado correctamente.')
-        return error_response(message='Error al actualizar el perfil.', errors=serializer.errors, status_code=400)
+            return success_response(data=serializer.data, message='Profile updated successfully.')
+        return error_response(message='Error updating profile.', errors=serializer.errors, status_code=400)
 
 
 class FollowView(APIView):
@@ -155,12 +155,12 @@ class FollowView(APIView):
     def post(self, request, username):
         target = get_object_or_404(User, username=username)
         if target == request.user:
-            return error_response(message='No podés seguirte a vos mismo.', status_code=400)
+            return error_response(message='You cannot follow yourself.', status_code=400)
         follow, created = Follow.objects.get_or_create(follower=request.user, following=target)
         if not created:
             follow.delete()
-            return success_response(message=f'Dejaste de seguir a {target.username}.')
-        return success_response(message=f'Ahora seguís a {target.username}.', status_code=201)
+            return success_response(message=f'You stopped following {target.username}.')
+        return success_response(message=f'You are now following {target.username}.', status_code=201)
 
 
 class FollowersListView(APIView):

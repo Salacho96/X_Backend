@@ -19,7 +19,7 @@ class TweetListCreateView(APIView):
         summary='Listar tweets propios',
         description='Retorna los tweets del usuario autenticado paginados.',
         parameters=[
-            OpenApiParameter('page', OpenApiTypes.INT, description='Número de página', required=False)
+            OpenApiParameter('page', OpenApiTypes.INT, description='Page number', required=False)
         ]
     )
     def get(self, request):
@@ -48,10 +48,10 @@ class TweetListCreateView(APIView):
             tweet = serializer.save(author=request.user)
             return success_response(
                 data=TweetSerializer(tweet, context={'request': request}).data,
-                message='Tweet creado correctamente.',
+                message='Tweet created successfully.',
                 status_code=201
             )
-        return error_response(message='Error al crear el tweet.', errors=serializer.errors, status_code=400)
+        return error_response(message='Error creating tweet.', errors=serializer.errors, status_code=400)
 
 
 class TweetDetailView(APIView):
@@ -75,9 +75,9 @@ class TweetDetailView(APIView):
     def delete(self, request, pk):
         tweet = get_object_or_404(Tweet, pk=pk)
         if tweet.author != request.user:
-            return error_response(message='No podés eliminar un tweet ajeno.', status_code=403)
+            return error_response(message='You are not the owner of this tweet.', status_code=403)
         tweet.delete()
-        return success_response(message='Tweet eliminado correctamente.')
+        return success_response(message='Tweet deleted successfully.')
 
 
 class TimelineView(APIView):
@@ -88,7 +88,7 @@ class TimelineView(APIView):
         summary='Timeline',
         description='Retorna los tweets de los usuarios que seguís, ordenados cronológicamente.',
         parameters=[
-            OpenApiParameter('page', OpenApiTypes.INT, description='Número de página', required=False)
+            OpenApiParameter('page', OpenApiTypes.INT, description='Page number', required=False)
         ]
     )
     def get(self, request):
@@ -120,5 +120,5 @@ class LikeView(APIView):
         like, created = Like.objects.get_or_create(user=request.user, tweet=tweet)
         if not created:
             like.delete()
-            return success_response(message='Like eliminado.')
-        return success_response(message='Like agregado.', status_code=201)
+            return success_response(message='Like removed.')
+        return success_response(message='Like added.', status_code=201)
